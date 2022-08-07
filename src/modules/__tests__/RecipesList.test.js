@@ -1,7 +1,6 @@
-import "./App.css";
-import RecipeCard from "./modules/RecipeCard";
-import RecipesList from "./modules/RecipesList";
-import ThemeProvider from "./components/ThemeProvider";
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import RecipesList from "../RecipesList";
 
 const mockData = {
   id: "5f4d4a7e62fb0224951e7ec4",
@@ -16,12 +15,9 @@ const mockData = {
   yields: 2,
 };
 
-function App() {
-  return (
-    <ThemeProvider>
-      <RecipesList />
-    </ThemeProvider>
-  );
-}
-
-export default App;
+test("renders", () => {
+  const { container } = render(<RecipesList />);
+  expect(screen.getByTestId("headline")).toBeInTheDocument();
+  expect(screen.getByTestId("heading")).toBeInTheDocument();
+  console.log(container.children().getByTestId("heading"));
+});
